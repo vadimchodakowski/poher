@@ -11,15 +11,16 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git clone https://github.com/vadimchodakowski/poher.git
+                    sh "rm -r ./poher"
+                    sh "git clone https://github.com/vadimchodakowski/poher.git"
                 }
             }
         }    
         stage('Build and Deploy') {
             steps {
-                script {
-                            sh "chmod 777 ./file.sh"
-                            sh "./file.sh ${params.account}"
+                script {    
+                            sh "chmod 777 poher/file.sh"
+                            sh "bash poher/file.sh ${params.account}"
                                     }
                                 }
                             }
